@@ -4,7 +4,7 @@ end
 
 function FrontendState(backend_state::BackendState, extensions::Vector)
     activate_makie_frontend()
-    fig = Figure(size = (2800, 1200))
+    fig = Figure(size = (2000, 900))
     plot_column = GridLayout(fig[1, 1])
     widget_column = GridLayout(fig[1, 2])
     draw_axes(plot_column, backend_state.sol)

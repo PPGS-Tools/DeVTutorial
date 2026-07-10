@@ -18,7 +18,7 @@ function BackendState(setup_function::Function, extensions::Vector)
     # :pre_init
     u0 = lift(nw) do nw
         println("Initializing")
-        initialize_from_pf!(nw)
+        initialize_from_pf!(nw; verbose=false)
         NWState(nw)
     end
 
