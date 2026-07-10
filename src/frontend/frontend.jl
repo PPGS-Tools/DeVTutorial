@@ -26,6 +26,7 @@ function activate_makie_frontend(;force_web=false)
         userpath = ENV["JUPYTERHUB_SERVICE_PREFIX"]
         Page(listen_port=9091, proxy_url="https://hub.bwjupyter.de$(userpath)proxy/9091")
     else
-        GLMakie.activate!()
+        error("Failed to activate WGLMakie frontend")
+        #GLMakie.activate!()
     end
 end

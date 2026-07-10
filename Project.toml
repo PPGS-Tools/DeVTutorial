@@ -15,5 +15,4 @@ PowerDynamics = "cc46b21f-1b17-51c2-b642-af74c3d3a8be"
 WGLMakie = "276b4fcb-3e11-5398-bf8b-a0c2d153d008"
 
 [compat]
-GLMakie = "0.13.12"
 julia = "1.11.4"
