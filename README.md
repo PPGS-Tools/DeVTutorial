@@ -3,6 +3,7 @@ How to use:
 2. Run the following commands in the terminal:
 ```
 using Pkg
+Pkg.activate(".")
 Pkg.add(url="https://github.com/PPGS-Tools/DeVTutorial.git")
 using DeVTutorial
 app()
