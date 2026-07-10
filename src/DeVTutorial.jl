@@ -7,7 +7,7 @@ using NetworkDynamics
 using Graphs
 using OrdinaryDiffEqRosenbrock
 using OrdinaryDiffEqNonlinearSolve
-using GLMakie
+#using GLMakie
 using WGLMakie # Interactive Plot
 using Bonito
 
