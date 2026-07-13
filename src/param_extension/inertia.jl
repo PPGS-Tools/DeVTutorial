@@ -10,9 +10,9 @@ function ParamExtension(::Type{InertiaExtension})
 
     function add_widgets!(fig, nr)
         inertia_sliders = SliderGrid(fig[nr, 1], 
-            (label=L"$H_1$", range = 0.1:0.1:30, startvalue = 6), 
-            (label=L"$H_2$", range = 0.1:0.1:30, startvalue = 6), 
-            (label=L"$H_3$", range = 0.1:0.1:30, startvalue = 6)
+            (label=L"$\frac{H_1}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6), 
+            (label=L"$\frac{H_2}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6), 
+            (label=L"$\frac{H_3}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6)
         )
         return combine([s.value for s in inertia_sliders.sliders])
     end

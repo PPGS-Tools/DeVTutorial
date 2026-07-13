@@ -4,25 +4,25 @@
 function draw_axes(fig, sol; firstindex=1)
 
     # Generator power
-    ax = Axis(fig[firstindex, 1]; title="Generator Power", xlabel="Time [s]", ylabel="Power [pu]")
+    ax = Axis(fig[firstindex, 1]; title="Generatorwirkleistung", xlabel="Zeit in s", ylabel="Leistung in MW")
     for i in 1:3
-        lines!(ax, sol; idxs=VIndex(i,:generator₊machine₊P), label="Bus $i", color=Cycled(i))
+        lines!(ax, sol; idxs=@obsex(1000 * VIndex(i,:generator₊machine₊P)), label="Bus $i", color=Cycled(i))
     end
-    ylims!(ax, (-1.0, 2.0))
+    ylims!(ax, (400.0, 600.0))
     xlims!(ax, (START_TIME, END_TIME))
-    axislegend(ax)
+    axislegend(ax)#["Region 1", "Region 2", "Region 3"]
 
-    # Voltage magnitude at all buses
-    ax = Axis(fig[firstindex+1, 1]; title="Voltage Magnitude", xlabel="Time [s]", ylabel="Voltage [pu]")
-    for i in 1:3
-        lines!(ax, sol; idxs=VIndex(i,:busbar₊u_mag), label="Bus $i", color=Cycled(i))
-    end
-    ylims!(ax, (0.9, 1.1))
-    xlims!(ax, (START_TIME, END_TIME))
-    axislegend(ax)
+    # # Voltage magnitude at all buses
+    # ax = Axis(fig[firstindex+1, 1]; title="Voltage Magnitude", xlabel="Time [s]", ylabel="Voltage [pu]")
+    # for i in 1:3
+    #     lines!(ax, sol; idxs=VIndex(i,:busbar₊u_mag), label="Bus $i", color=Cycled(i))
+    # end
+    # ylims!(ax, (0.9, 1.1))
+    # xlims!(ax, (START_TIME, END_TIME))
+    # axislegend(ax)
 
     # Generator frequencies
-    ax = Axis(fig[firstindex+2, 1]; title="Generator Frequency", xlabel="Time [s]", ylabel="Frequency [Hz]")
+    ax = Axis(fig[firstindex+1, 1]; title="Frequenz", xlabel="Zeit in s", ylabel="Frequenz in Hz")
     for i in 1:3
         lines!(ax, sol; idxs=VIndex(i,:generator₊meas₊f), label="Gen $i", color=Cycled(i))
     end
@@ -31,7 +31,7 @@ function draw_axes(fig, sol; firstindex=1)
     axislegend(ax)
 
     # Line flows
-    ax = Axis(fig[firstindex+3, 1]; title="Powerflow", xlabel="Time [s]", ylabel="Power [MW]")
+    ax = Axis(fig[firstindex+2, 1]; title="Austauschleistung", xlabel="Zeit in s", ylabel="Leistung in MW")
     for i in 1:2
         lines!(ax, sol; idxs=EIndex(i,:src₊P), label="Line $i", color=Cycled(i))
     end
@@ -42,7 +42,7 @@ function draw_axes(fig, sol; firstindex=1)
 end
 
 function draw_eigenvalue_axis(fig, λ)
-    ax = Axis(fig; title="Eigenvalues", xlabel=L"$Real(\lambda)$", ylabel=L"$Imag(\lambda)$")
+    ax = Axis(fig; title="Eigenwerte", xlabel=L"$Real(\lambda)$", ylabel=L"$Imag(\lambda)$")
     for i in 1:3
         scatter!(ax, λ)
     end

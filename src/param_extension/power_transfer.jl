@@ -10,7 +10,7 @@ function ParamExtension(::Type{PowerTransferExtension})
 
     function add_widgets!(fig, nr)
         transfer_sliders = SliderGrid(fig[nr, 1],
-            (label=L"P_\mathrm{A}", range = -1:0.1:1, startvalue = 0.0)
+            (label=L"\frac{P_{\mathrm{A}(1-3)}}{500 \mathrm{MW}}", range = -1:0.1:1, startvalue = 0.0)
         )
         return combine([s.value for s in transfer_sliders.sliders])
     end

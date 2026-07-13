@@ -18,9 +18,9 @@ function ParamExtension(::Type{DisturbanceExtension})
 
     function add_widgets!(fig, nr)
         dist_sliders = SliderGrid(fig[nr, 1], 
-            (label=L"$\Delta P_1$", range = -1:0.01:1, startvalue = 0), 
-            (label=L"$\Delta P_2$", range = -1:0.01:1, startvalue = 0), 
-            (label=L"$\Delta P_3$", range = -1:0.01:1, startvalue = 0)
+            (label=L"$\frac{\Delta P_{\mathrm{Z},1}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0), 
+            (label=L"$\frac{\Delta P_{\mathrm{Z},2}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0), 
+            (label=L"$\frac{\Delta P_{\mathrm{Z},3}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0)
         )
         return combine([s.value for s in dist_sliders.sliders])
     end

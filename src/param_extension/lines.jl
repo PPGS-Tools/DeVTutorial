@@ -10,8 +10,8 @@ function ParamExtension(::Type{LineExtension})
 
     function add_widgets!(fig, nr)
         line_sliders = SliderGrid(fig[nr, 1],
-            (label=L"d_1", range = 0.1:0.1:10, startvalue = 1),
-            (label=L"d_2", range = 0.1:0.1:10, startvalue = 1)
+            (label=L"\frac{l_{1-2}}{100 \mathrm{km}}", range = 0.1:0.1:10, startvalue = 1),
+            (label=L"\frac{l_{2-3}}{100 \mathrm{km}}", range = 0.1:0.1:10, startvalue = 1)
         )
         return combine([s.value for s in line_sliders.sliders])
     end
