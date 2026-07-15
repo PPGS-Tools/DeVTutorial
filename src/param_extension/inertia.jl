@@ -9,12 +9,16 @@ function ParamExtension(::Type{InertiaExtension})
     trigger_level = :post_init
 
     function add_widgets!(fig, nr)
-        inertia_sliders = SliderGrid(fig[nr, 1], 
-            (label=L"$\frac{H_1}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6), 
-            (label=L"$\frac{H_2}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6), 
-            (label=L"$\frac{H_3}{\mathrm{s}}$", range = 0.1:0.1:30, startvalue = 6)
-        )
-        return combine([s.value for s in inertia_sliders.sliders])
+        function _label_format(x)
+            L"$T_{\mathrm{A},%$(x)}$"
+        end
+
+        function _unit_format(x)
+            L"$\mathrm{s}$"
+        end
+
+        inertia_sliders = add_editable_sliders!(fig, nr, 3, _label_format, 0.005:0.005:12, 6.0, 2, _unit_format)
+        return combine([s.value for s in inertia_sliders])
     end
 
     callbacks = [

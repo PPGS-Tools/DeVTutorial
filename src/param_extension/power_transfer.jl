@@ -9,10 +9,16 @@ function ParamExtension(::Type{PowerTransferExtension})
     trigger_level = :pre_init
 
     function add_widgets!(fig, nr)
-        transfer_sliders = SliderGrid(fig[nr, 1],
-            (label=L"\frac{P_{\mathrm{A}(1-3)}}{500 \mathrm{MW}}", range = -1:0.1:1, startvalue = 0.0)
-        )
-        return combine([s.value for s in transfer_sliders.sliders])
+        function _label_format(x)
+            L"P_{\mathrm{A},(%$(x)-%$(x+2))}"
+        end
+
+        function _unit_format(x)
+            L"\mathrm{MW}"
+        end
+
+        transfer_sliders = add_editable_sliders!(fig, nr, 1, _label_format, -1:0.1:1, 0, 500, _unit_format; show_as_int = true)
+        return combine([s.value for s in transfer_sliders])
     end
 
     callbacks = [

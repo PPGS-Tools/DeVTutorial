@@ -2,6 +2,10 @@ struct LineExtension end
 
 function ParamExtension(::Type{LineExtension})
 
+    function _val_format(x)
+        L"$%$(round(Int, x * 100))\,\mathrm{km}$"
+    end
+
     function init_callbacks!(_, _)
         return false
     end
@@ -9,11 +13,16 @@ function ParamExtension(::Type{LineExtension})
     trigger_level = :pre_init
 
     function add_widgets!(fig, nr)
-        line_sliders = SliderGrid(fig[nr, 1],
-            (label=L"\frac{l_{1-2}}{100 \mathrm{km}}", range = 0.1:0.1:10, startvalue = 1),
-            (label=L"\frac{l_{2-3}}{100 \mathrm{km}}", range = 0.1:0.1:10, startvalue = 1)
-        )
-        return combine([s.value for s in line_sliders.sliders])
+        function _label_format(x)
+            L"l_{%$(x)-%$(x+1)}"
+        end
+
+        function _unit_format(x)
+            L"\mathrm{km}"
+        end
+
+        line_sliders = add_editable_sliders!(fig, nr, 2, _label_format, 0.1:0.1:10, 1, 100, _unit_format; show_as_int = true)
+        return combine([s.value for s in line_sliders])
     end
 
     callbacks = [

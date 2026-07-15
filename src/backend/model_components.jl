@@ -76,8 +76,8 @@ end
     end
     begin
         Z = (R + im*X) * l
-        Ysrc = (G_src + im*B_src) / l
-        Ydst = (G_dst + im*B_dst) / l
+        Ysrc = (G_src + im*B_src) * l
+        Ydst = (G_dst + im*B_dst) * l
         Vsrc = src.u_r + im*src.u_i
         Vdst = dst.u_r + im*dst.u_i
         V₁ = r_src * Vsrc

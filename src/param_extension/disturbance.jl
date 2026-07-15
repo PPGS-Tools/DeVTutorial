@@ -17,12 +17,16 @@ function ParamExtension(::Type{DisturbanceExtension})
     trigger_level = :post_init
 
     function add_widgets!(fig, nr)
-        dist_sliders = SliderGrid(fig[nr, 1], 
-            (label=L"$\frac{\Delta P_{\mathrm{Z},1}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0), 
-            (label=L"$\frac{\Delta P_{\mathrm{Z},2}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0), 
-            (label=L"$\frac{\Delta P_{\mathrm{Z},3}}{500 \mathrm{MW}}$", range = -1:0.01:1, startvalue = 0)
-        )
-        return combine([s.value for s in dist_sliders.sliders])
+        function _label_format(n)
+            L"$\Delta P_{\mathrm{Z},%$(n)}$"
+        end
+
+        function _unit_format(x)
+            L"$\mathrm{MW}$"
+        end
+        
+        dist_sliders = add_editable_sliders!(fig, nr, 3, _label_format, -0.2:0.002:0.2, 0, 500, _unit_format; show_as_int=true)
+        return combine([s.value for s in dist_sliders])
     end
 
     callbacks = [

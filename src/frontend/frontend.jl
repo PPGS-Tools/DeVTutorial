@@ -4,10 +4,11 @@ end
 
 function FrontendState(backend_state::BackendState, extensions::Vector)
     activate_makie_frontend(;force_web=true)
-    fig = Figure(size = (1500, 700))
+    colors = Makie.wong_colors()
+    fig = Figure(size = (1300, 700))
     plot_column = GridLayout(fig[1, 1])
     widget_column = GridLayout(fig[1, 2])
-    draw_axes(plot_column, backend_state.sol)
+    draw_axes(plot_column, backend_state.sol, colors)
 
     for (ctr, ext) in enumerate(extensions)
         register_param_extension!(widget_column, backend_state, ext, ctr)
@@ -16,7 +17,7 @@ function FrontendState(backend_state::BackendState, extensions::Vector)
     draw_eigenvalue_axis(widget_column[length(extensions)+1, 1], backend_state.λ)
 
     widget_column.tellheight = false
-    colsize!(fig.layout, 2, Auto(0.3))
+    colsize!(fig.layout, 2, Auto(0.4))
     FrontendState(fig)
 end
 
