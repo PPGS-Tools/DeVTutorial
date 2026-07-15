@@ -1,3 +1,8 @@
+# Portions of this implementation are adapted from PowerDynamics.jl
+#
+# Copyright (c) 2024 Hans Würfel <git@wuerfel.io> and contributors
+# Licensed under the MIT License.
+
 using ModelingToolkit
 using ModelingToolkit: t_nounits as t, D_nounits as Dt
 using ModelingToolkitStandardLibrary.Blocks: RealInput
